@@ -1,7 +1,7 @@
 import de.bezier.guido.*;
 //Declare and initialize constants NUM_ROWS and NUM_COLS = 20
-public final static int NUM_ROWS = 3;
-public final static int NUM_COLS = 3;
+public final static int NUM_ROWS = 10;
+public final static int NUM_COLS = 10;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList<MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -51,7 +51,6 @@ public boolean isWon()
   for(int c = 0; c<NUM_COLS;c++){
   if(mines.contains(buttons[r][c])&&buttons[r][c].isFlagged()==true)
   countm++;
-  //if(!mines.contains(buttons[r][c])&&buttons[r][c].clicked==true)
   else if(buttons[r][c].clicked==true)
   countx++;
   }
@@ -62,16 +61,18 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
- String str = "YOU LOSE";
- for(int c = 0; c<NUM_COLS;c++)
- buttons[NUM_ROWS/2][c].setLabel(str.substring(c,c+1));
  
  for(int r = 0 ; r<NUM_ROWS; r++){
  for (int c = 0; c < NUM_COLS; c++){
- buttons[r][c].clicked=true;
- buttons[r][c].mousePressed();
+  if(mines.contains(buttons[r][c])){
+ buttons[r][c].clicked=true; 
+  fill(255, 0, 0);
+  }
  }
  }
+ String str = "YOU LOSE";
+ for(int c = 0; c<NUM_COLS;c++)
+ buttons[NUM_ROWS/2][c].setLabel(str.substring(c,c+1));
 }
 public void displayWinningMessage()
 {
